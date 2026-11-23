@@ -1,0 +1,6 @@
+{
+  "name": "Portale Operativo Ricorsi Scolastici",
+  "description": "Web app interattiva per la consultazione operativa, verifica dei requisiti, gestione documentale ed esportazione PDF dei ricorsi nel diritto scolastico per Docenti, ATA e Dirigenti.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
