@@ -54,7 +54,11 @@ export default function App() {
   const [checkedDocs, setCheckedDocs] = useState<Record<string, boolean>>(() => {
     try {
       const saved = localStorage.getItem(STORAGE_DOCS_KEY);
-      return saved ? JSON.parse(saved) : {};
+      if (!saved) return {};
+      const parsed: unknown = JSON.parse(saved);
+      return parsed && typeof parsed === 'object' && !Array.isArray(parsed)
+        ? (parsed as Record<string, boolean>)
+        : {};
     } catch {
       return {};
     }
@@ -147,7 +151,7 @@ export default function App() {
           >
             <span className="inline-flex items-center justify-center bg-white rounded-md p-1 border border-[#CBD5E1] dark:border-transparent shrink-0">
               <img
-                src="/assets/aistudio/logo_piccolo_fc815523.png"
+                src="./assets/aistudio/logo_piccolo_fc815523.png"
                 alt="Logo Studio legale Golinelli"
                 className="h-7 w-auto object-contain"
               />

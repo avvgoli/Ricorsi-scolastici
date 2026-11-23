@@ -1,7 +1,7 @@
-import { jsPDF } from 'jspdf';
+import type { jsPDF as JsPDFType } from 'jspdf';
 import type { RicorsoOperativo } from '../data/ricorsi';
 
-function wrapText(doc: jsPDF, text: string, maxWidth: number): string[] {
+function wrapText(doc: JsPDFType, text: string, maxWidth: number): string[] {
   return doc.splitTextToSize(text, maxWidth);
 }
 
@@ -9,10 +9,11 @@ function wrapText(doc: jsPDF, text: string, maxWidth: number): string[] {
  * Esporta in PDF la scheda operativa di un singolo ricorso,
  * includendo lo stato interattivo della checklist documentale dell'utente.
  */
-export function exportSingleRicorsoPDF(
+export async function exportSingleRicorsoPDF(
   ricorso: RicorsoOperativo,
   checkedDocIds: Record<string, boolean>
-): void {
+): Promise<void> {
+  const { jsPDF } = await import('jspdf');
   const doc = new jsPDF({ unit: 'mm', format: 'a4' });
   const pageWidth = doc.internal.pageSize.getWidth();
   const pageHeight = doc.internal.pageSize.getHeight();
@@ -168,11 +169,12 @@ export function exportSingleRicorsoPDF(
 /**
  * Esporta in PDF un dossier riepilogativo di tutti i ricorsi filtrati o consigliati dal simulatore.
  */
-export function exportCatalogSummaryPDF(
+export async function exportCatalogSummaryPDF(
   ricorsi: RicorsoOperativo[],
   titoloDossier: string,
   checkedDocs: Record<string, boolean>
-): void {
+): Promise<void> {
+  const { jsPDF } = await import('jspdf');
   const doc = new jsPDF({ unit: 'mm', format: 'a4' });
   const pageWidth = doc.internal.pageSize.getWidth();
   const pageHeight = doc.internal.pageSize.getHeight();
