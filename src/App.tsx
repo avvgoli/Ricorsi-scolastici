@@ -151,7 +151,7 @@ export default function App() {
           >
             <span className="inline-flex items-center justify-center bg-white rounded-md p-1 border border-[#CBD5E1] dark:border-transparent shrink-0">
               <img
-                src="/assets/aistudio/logo_piccolo_fc815523.png"
+                src="./assets/aistudio/logo_piccolo_fc815523.png"
                 alt="Logo Studio legale Golinelli"
                 className="h-7 w-auto object-contain"
               />
