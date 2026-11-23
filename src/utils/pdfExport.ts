@@ -1,7 +1,7 @@
-import type { jsPDF as JsPDFType } from 'jspdf';
+import { jsPDF } from 'jspdf';
 import type { RicorsoOperativo } from '../data/ricorsi';
 
-function wrapText(doc: JsPDFType, text: string, maxWidth: number): string[] {
+function wrapText(doc: jsPDF, text: string, maxWidth: number): string[] {
   return doc.splitTextToSize(text, maxWidth);
 }
 
@@ -13,7 +13,6 @@ export async function exportSingleRicorsoPDF(
   ricorso: RicorsoOperativo,
   checkedDocIds: Record<string, boolean>
 ): Promise<void> {
-  const { jsPDF } = await import('jspdf');
   const doc = new jsPDF({ unit: 'mm', format: 'a4' });
   const pageWidth = doc.internal.pageSize.getWidth();
   const pageHeight = doc.internal.pageSize.getHeight();
@@ -174,7 +173,6 @@ export async function exportCatalogSummaryPDF(
   titoloDossier: string,
   checkedDocs: Record<string, boolean>
 ): Promise<void> {
-  const { jsPDF } = await import('jspdf');
   const doc = new jsPDF({ unit: 'mm', format: 'a4' });
   const pageWidth = doc.internal.pageSize.getWidth();
   const pageHeight = doc.internal.pageSize.getHeight();
